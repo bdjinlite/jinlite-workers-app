@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">জিনলাইট কর্মী</string>
+    <string name="nav_home">হোম</string>
+    <string name="nav_notices">নোটিশ</string>
+    <string name="nav_holidays">ছুটি ও নিয়ম</string>
+    <string name="nav_grievance">অভিযোগ</string>
+    <string name="nav_quizzes">কুইজ</string>
+    <string name="nav_profile">প্রোফাইল</string>
+    <string name="offline_banner">আপনি অফলাইনে আছেন। সেভ করা তথ্য দেখানো হচ্ছে।</string>
+    <string name="refresh">রিফ্রেশ</string>
+    <string name="loading">লোড হচ্ছে...</string>
+</resources>

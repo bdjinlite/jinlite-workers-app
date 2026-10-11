@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Jinlite Workers</string>
+    <string name="nav_home">Home</string>
+    <string name="nav_notices">Notices</string>
+    <string name="nav_holidays">Holidays</string>
+    <string name="nav_grievance">Grievance</string>
+    <string name="nav_quizzes">Quiz</string>
+    <string name="nav_profile">Profile</string>
+    <string name="offline_banner">You are currently offline. Showing saved data.</string>
+    <string name="refresh">Refresh</string>
+    <string name="loading">Loading...</string>
+</resources>
