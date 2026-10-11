@@ -196,6 +196,77 @@ class WorkerRepository(
         }
     }
 
+    // --- ৬. কর্মী লগইন ---
+    suspend fun loginWorker(cardNo: String, phone: String): Result<Map<String, Any>> = withContext(Dispatchers.IO) {
+        if (!isNetworkAvailable()) {
+            return@withContext Result.failure(Exception("লগইন করতে ইন্টারনেট সংযোগ প্রয়োজন"))
+        }
+        try {
+            val payload = mapOf(
+                "action" to "loginWorker",
+                "card_no" to cardNo,
+                "phone" to phone
+            )
+            val jsonBody = gson.toJson(payload).toRequestBody("application/json".toMediaType())
+            val res = api.postAction(jsonBody)
+
+            if (res.success && res.data != null) {
+                val dataMap = res.data as? Map<*, *>
+                val resultMap = mutableMapOf<String, Any>()
+                dataMap?.forEach { (k, v) ->
+                    if (k != null && v != null) resultMap[k.toString()] = v
+                }
+                Result.success(resultMap)
+            } else {
+                Result.failure(Exception(res.message ?: "লগইন ব্যর্থ হয়েছে"))
+            }
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    // --- ৭. কর্মী নতুন রেজিস্ট্রেশন ---
+    suspend fun registerWorker(
+        cardNo: String,
+        phone: String,
+        fullNameBn: String,
+        plant: String,
+        floor: String,
+        side: String,
+        designation: String
+    ): Result<Map<String, Any>> = withContext(Dispatchers.IO) {
+        if (!isNetworkAvailable()) {
+            return@withContext Result.failure(Exception("রেজিস্ট্রেশন করতে ইন্টারনেট সংযোগ প্রয়োজন"))
+        }
+        try {
+            val payload = mapOf(
+                "action" to "registerWorker",
+                "card_no" to cardNo,
+                "phone" to phone,
+                "full_name_bn" to fullNameBn,
+                "plant" to plant,
+                "floor" to floor,
+                "side" to side,
+                "designation" to designation
+            )
+            val jsonBody = gson.toJson(payload).toRequestBody("application/json".toMediaType())
+            val res = api.postAction(jsonBody)
+
+            if (res.success && res.data != null) {
+                val dataMap = res.data as? Map<*, *>
+                val resultMap = mutableMapOf<String, Any>()
+                dataMap?.forEach { (k, v) ->
+                    if (k != null && v != null) resultMap[k.toString()] = v
+                }
+                Result.success(resultMap)
+            } else {
+                Result.failure(Exception(res.message ?: "রেজিস্ট্রেশন ব্যর্থ হয়েছে"))
+            }
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
     // ইন্টারনেট সংযোগ চেক হেল্পার
     fun isNetworkAvailable(): Boolean {
         val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as? ConnectivityManager ?: return false
